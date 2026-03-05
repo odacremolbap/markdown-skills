@@ -48,7 +48,7 @@ curl -o .claude/skills/markdown-skills/SKILL.md \
 
 The skill is defined in [`skills/markdown-skills/SKILL.md`](skills/markdown-skills/SKILL.md). To use it with any AI coding agent that supports system prompts or custom instructions:
 
-1. Copy the contents of `SKILL.md` (skip the YAML frontmatter between the `---` delimiters)
+1. Copy the contents of [`skills/markdown-skills/SKILL.md`](skills/markdown-skills/SKILL.md) (skip the YAML frontmatter between the `---` delimiters)
 2. Add it to your agent's system prompt, custom instructions, or rules file
 
 Common locations by agent:
@@ -64,7 +64,7 @@ Common locations by agent:
 
 ### Manual / Generic
 
-If your agent doesn't support file-based rules, paste the content of `SKILL.md` directly into the system prompt or conversation context before asking the agent to create diagrams.
+If your agent doesn't support file-based rules, paste the content of [`skills/markdown-skills/SKILL.md`](skills/markdown-skills/SKILL.md) directly into the system prompt or conversation context before asking the agent to create diagrams.
 
 ## Usage
 
