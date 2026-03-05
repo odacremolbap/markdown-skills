@@ -54,7 +54,8 @@ jobs:
           python3 - <<'PYEOF'
           import re, subprocess, sys, tempfile, os
 
-          content = open("skills/markdown-skills/SKILL.md").read()
+          with open("skills/markdown-skills/SKILL.md", encoding="utf-8") as f:
+              content = f.read()
           blocks = re.findall(r"```mermaid\n(.*?)\n```", content, re.DOTALL)
 
           if not blocks:
