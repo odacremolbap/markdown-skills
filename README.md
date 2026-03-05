@@ -15,20 +15,18 @@ When installed, this skill provides guidelines for:
 
 ### Claude Code
 
-Install from the skill marketplace:
+Clone or copy `SKILL.md` into a skill directory. Personal skills go in `~/.claude/skills/` (available across all projects), project skills go in `.claude/skills/` (committed to version control):
 
-```
-/install-skill https://github.com/odacremolbap/markdown-skills
-```
+```bash
+# Personal (all projects)
+mkdir -p ~/.claude/skills/markdown-skills
+curl -o ~/.claude/skills/markdown-skills/SKILL.md \
+  https://raw.githubusercontent.com/odacremolbap/markdown-skills/main/SKILL.md
 
-Or add it manually to your project's `.claude/settings.json`:
-
-```json
-{
-  "skills": [
-    "https://github.com/odacremolbap/markdown-skills"
-  ]
-}
+# Project (this repo only)
+mkdir -p .claude/skills/markdown-skills
+curl -o .claude/skills/markdown-skills/SKILL.md \
+  https://raw.githubusercontent.com/odacremolbap/markdown-skills/main/SKILL.md
 ```
 
 ### Other Agents
@@ -57,7 +55,7 @@ If your agent doesn't support file-based rules, paste the content of `SKILL.md` 
 
 Once installed, the skill activates automatically when you ask the agent to create or fix diagrams, flowcharts, or ASCII art in Markdown files. You can also invoke it explicitly:
 
-- In Claude Code: `/markdown-diagrams`
+- In Claude Code: `/markdown-skills`
 - In other agents: reference the rules file or include a prompt like _"follow the markdown diagram guidelines"_
 
 ## License
