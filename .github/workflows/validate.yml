@@ -21,7 +21,7 @@ jobs:
         run: pip install git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref
 
       - name: Validate skill
-        run: skills-ref validate .
+        run: skills-ref validate skills/markdown-skills
 
   lint-markdown:
     name: Lint Markdown
@@ -54,7 +54,7 @@ jobs:
           python3 - <<'PYEOF'
           import re, subprocess, sys, tempfile, os
 
-          content = open("SKILL.md").read()
+          content = open("skills/markdown-skills/SKILL.md").read()
           blocks = re.findall(r"```mermaid\n(.*?)\n```", content, re.DOTALL)
 
           if not blocks:

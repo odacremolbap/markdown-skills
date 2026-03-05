@@ -1,0 +1,10 @@
+{
+  "name": "markdown-skills",
+  "description": "Guidelines for creating well-aligned diagrams, tables, and visual elements in Markdown files. Covers Mermaid diagrams, Unicode box-drawing, and lightweight rendered alternatives.",
+  "version": "1.0.0",
+  "author": {
+    "name": "odacremolbap"
+  },
+  "repository": "https://github.com/odacremolbap/markdown-skills",
+  "license": "Apache-2.0"
+}
