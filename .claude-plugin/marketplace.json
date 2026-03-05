@@ -1,0 +1,9 @@
+{
+  "plugins": [
+    {
+      "name": "markdown-skills",
+      "description": "Guidelines for creating well-aligned diagrams, tables, and visual elements in Markdown files. Covers Mermaid diagrams, Unicode box-drawing, and lightweight rendered alternatives.",
+      "source": "."
+    }
+  ]
+}

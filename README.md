@@ -1,10 +1,10 @@
-# Markdown Diagrams Skill
+# Markdown Skills Plugin
 
-A reusable skill that teaches AI coding agents how to create well-aligned diagrams and visual elements in Markdown files. Covers Mermaid diagrams, Unicode box-drawing, and lightweight rendered alternatives.
+A Claude Code plugin that teaches AI coding agents how to create well-aligned diagrams and visual elements in Markdown files. Covers Mermaid diagrams, Unicode box-drawing, and lightweight rendered alternatives.
 
 ## What It Does
 
-When installed, this skill provides guidelines for:
+When installed, this plugin provides guidelines for:
 
 - **Mermaid diagrams** — 20+ diagram types with syntax reference, best practices, and layout control (flowcharts, sequence diagrams, class diagrams, ER diagrams, Gantt charts, C4, and more)
 - **Unicode box-drawing** — precise character-level diagrams with alignment rules and verification checklists
@@ -13,27 +13,42 @@ When installed, this skill provides guidelines for:
 
 ## Installation
 
-### Claude Code
+### Claude Code (Plugin)
 
-Clone or copy `SKILL.md` into a skill directory. Personal skills go in `~/.claude/skills/` (available across all projects), project skills go in `.claude/skills/` (committed to version control):
+Add the marketplace and install the plugin:
+
+```shell
+/plugin marketplace add odacremolbap/markdown-skills
+/plugin install markdown-skills
+```
+
+To update the plugin later:
+
+```shell
+/plugin marketplace update markdown-skills
+```
+
+### Claude Code (Manual)
+
+If you prefer not to use the plugin system, copy the skill file directly:
 
 ```bash
 # Personal (all projects)
 mkdir -p ~/.claude/skills/markdown-skills
 curl -o ~/.claude/skills/markdown-skills/SKILL.md \
-  https://raw.githubusercontent.com/odacremolbap/markdown-skills/main/SKILL.md
+  https://raw.githubusercontent.com/odacremolbap/markdown-skills/main/skills/markdown-skills/SKILL.md
 
 # Project (this repo only)
 mkdir -p .claude/skills/markdown-skills
 curl -o .claude/skills/markdown-skills/SKILL.md \
-  https://raw.githubusercontent.com/odacremolbap/markdown-skills/main/SKILL.md
+  https://raw.githubusercontent.com/odacremolbap/markdown-skills/main/skills/markdown-skills/SKILL.md
 ```
 
 ### Other Agents
 
-The skill is defined in [`SKILL.md`](SKILL.md) at the repo root. To use it with any AI coding agent that supports system prompts or custom instructions:
+The skill is defined in [`skills/markdown-skills/SKILL.md`](skills/markdown-skills/SKILL.md). To use it with any AI coding agent that supports system prompts or custom instructions:
 
-1. Copy the contents of `SKILL.md` (skip the YAML frontmatter between the `---` delimiters)
+1. Copy the contents of [`skills/markdown-skills/SKILL.md`](skills/markdown-skills/SKILL.md) (skip the YAML frontmatter between the `---` delimiters)
 2. Add it to your agent's system prompt, custom instructions, or rules file
 
 Common locations by agent:
@@ -49,14 +64,25 @@ Common locations by agent:
 
 ### Manual / Generic
 
-If your agent doesn't support file-based rules, paste the content of `SKILL.md` directly into the system prompt or conversation context before asking the agent to create diagrams.
+If your agent doesn't support file-based rules, paste the content of [`skills/markdown-skills/SKILL.md`](skills/markdown-skills/SKILL.md) directly into the system prompt or conversation context before asking the agent to create diagrams.
 
 ## Usage
 
 Once installed, the skill activates automatically when you ask the agent to create or fix diagrams, flowcharts, or ASCII art in Markdown files. You can also invoke it explicitly:
 
-- In Claude Code: `/markdown-skills`
+- In Claude Code: `/markdown-skills:markdown-skills`
 - In other agents: reference the rules file or include a prompt like _"follow the markdown diagram guidelines"_
+
+## Plugin Structure
+
+```text
+.claude-plugin/
+  plugin.json           # Plugin manifest
+  marketplace.json      # Marketplace catalog
+skills/
+  markdown-skills/
+    SKILL.md            # Skill instructions
+```
 
 ## License
 
