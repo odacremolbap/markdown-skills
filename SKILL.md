@@ -1,5 +1,5 @@
 ---
-name: markdown-diagrams
+name: markdown-skills
 description: Guidelines for creating well-aligned diagrams in Markdown. Use when writing or fixing diagrams, flowcharts, or ASCII art in Markdown files.
 user_invocable: true
 ---

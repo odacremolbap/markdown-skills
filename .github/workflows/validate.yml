@@ -1,0 +1,90 @@
+name: Validate Skill
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-frontmatter:
+    name: Validate SKILL.md frontmatter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install skills-ref validator
+        run: pip install git+https://github.com/agentskills/agentskills.git#subdirectory=skills-ref
+
+      - name: Validate skill
+        run: skills-ref validate .
+
+  lint-markdown:
+    name: Lint Markdown
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DavidAnson/markdownlint-cli2-action@v22
+        with:
+          globs: "**/*.md"
+
+  validate-mermaid:
+    name: Validate Mermaid diagrams
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install mermaid CLI
+        run: npm install -g @mermaid-js/mermaid-cli
+
+      - name: Create puppeteer config for CI
+        run: echo '{ "args": ["--no-sandbox", "--disable-setuid-sandbox"] }' > /tmp/puppeteer.json
+
+      - name: Extract and validate Mermaid blocks
+        run: |
+          python3 - <<'PYEOF'
+          import re, subprocess, sys, tempfile, os
+
+          content = open("SKILL.md").read()
+          blocks = re.findall(r"```mermaid\n(.*?)\n```", content, re.DOTALL)
+
+          if not blocks:
+              print("No mermaid blocks found.")
+              sys.exit(0)
+
+          print(f"Found {len(blocks)} mermaid block(s)")
+          failed = 0
+
+          for i, block in enumerate(blocks, 1):
+              with tempfile.NamedTemporaryFile(mode="w", suffix=".mmd", delete=False) as f:
+                  f.write(block)
+                  f.flush()
+                  result = subprocess.run(
+                      ["mmdc", "-i", f.name, "-o", "/dev/null",
+                       "-p", "/tmp/puppeteer.json"],
+                      capture_output=True, text=True
+                  )
+                  if result.returncode == 0:
+                      print(f"  Block {i}: OK")
+                  else:
+                      print(f"  Block {i}: FAILED")
+                      print(f"    {block.splitlines()[0]}")
+                      if result.stderr:
+                          print(f"    {result.stderr.strip()[:200]}")
+                      failed += 1
+                  os.unlink(f.name)
+
+          if failed:
+              print(f"\n{failed} block(s) failed validation")
+              sys.exit(1)
+          print("\nAll mermaid blocks valid")
+          PYEOF
