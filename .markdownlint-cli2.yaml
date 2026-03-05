@@ -1,0 +1,22 @@
+config:
+  # Allow long lines in tables and code blocks
+  MD013:
+    line_length: 200
+    tables: false
+    code_blocks: false
+  # Allow multiple top-level headings (SKILL.md has parts)
+  MD025: false
+  # Allow trailing punctuation in headings
+  MD026: false
+  # Allow inline HTML (used in Mermaid examples)
+  MD033: false
+  # Lists without surrounding blank lines (compact reference style)
+  MD032: false
+  # Code blocks without language (box-drawing examples)
+  MD040: false
+  # Allow tilde fences (used for nested fenced code examples)
+  MD048: false
+  # Allow compact table style (pipes without spaces)
+  MD060: false
+  # Code fences without surrounding blank lines (inside examples)
+  MD031: false
