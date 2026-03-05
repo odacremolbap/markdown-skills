@@ -1,9 +1,16 @@
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "odacremolbap-markdown-skills",
+  "description": "Plugins for creating well-aligned diagrams and visual elements in Markdown files",
+  "owner": {
+    "name": "odacremolbap",
+    "url": "https://github.com/odacremolbap/markdown-skills"
+  },
   "plugins": [
     {
       "name": "markdown-skills",
-      "description": "Guidelines for creating well-aligned diagrams, tables, and visual elements in Markdown files. Covers Mermaid diagrams, Unicode box-drawing, and lightweight rendered alternatives.",
-      "source": "."
+      "source": "./",
+      "description": "Guidelines for creating well-aligned diagrams, tables, and visual elements in Markdown files. Covers Mermaid diagrams, Unicode box-drawing, and lightweight rendered alternatives."
     }
   ]
 }
